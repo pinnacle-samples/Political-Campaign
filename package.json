@@ -1,0 +1,33 @@
+{
+  "name": "political-campaign-chatbot",
+  "version": "1.0.0",
+  "description": "JFK for President - Political Campaign RCS Chatbot",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "tsx watch index.ts",
+    "start": "tsx index.ts",
+    "build": "tsc",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "rcs",
+    "chatbot",
+    "political",
+    "campaign",
+    "pinnacle"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "rcs-js": "^2.0.4",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}
