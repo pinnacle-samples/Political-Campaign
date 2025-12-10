@@ -2,6 +2,10 @@
 
 An interactive RCS (Rich Communication Services) chatbot for a political campaign, powered by Pinnacle's RCS messaging platform. This chatbot demonstrates how political campaigns can engage voters through rich, interactive messaging experiences.
 
+
+https://github.com/user-attachments/assets/39050218-d3bb-409c-bdcb-8a6b78f1efc8
+
+
 ## Features
 
 ### Campaign Events
