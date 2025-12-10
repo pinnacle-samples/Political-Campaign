@@ -1,10 +1,7 @@
 # JFK for President - Political Campaign Chatbot
 
-An interactive RCS (Rich Communication Services) chatbot for a political campaign, powered by Pinnacle's RCS messaging platform. This chatbot demonstrates how political campaigns can engage voters through rich, interactive messaging experiences.
-
-
+An interactive political campaign RCS chatbot that demonstrates how campaigns can engage voters through Rich Communication Services (RCS) messaging, featuring event management, policy information, donations, and volunteer coordination.
 https://github.com/user-attachments/assets/39050218-d3bb-409c-bdcb-8a6b78f1efc8
-
 
 ## Features
 
@@ -50,30 +47,21 @@ https://github.com/user-attachments/assets/39050218-d3bb-409c-bdcb-8a6b78f1efc8
 - Polling location finder with location sharing
 - Registration status checking
 
-## Tech Stack
-
-- **Runtime**: Node.js with TypeScript
-- **Framework**: Express.js
-- **RCS SDK**: rcs-js (Pinnacle SDK) v2.0.6
-- **Type Safety**: Full TypeScript support with strict mode
-- **Environment**: dotenv for configuration management
-
 ## Project Structure
 
 ```
 Political-Campaign/
 ├── lib/
-│   ├── agent.ts              # JFK campaign agent logic
-│   ├── baseAgent.ts          # Base agent class
-│   ├── data.ts               # Campaign data (events, policies, etc.)
-│   └── rcsClient.ts          # Pinnacle client configuration
-├── router.ts                 # Express route handlers
-├── server.ts                 # Express server entry point
-├── package.json
-├── tsconfig.json
-├── .env.example
-├── .gitignore
-└── README.md
+│   ├── rcsClient.ts          # Pinnacle RCS client configuration
+│   ├── baseAgent.ts          # Base agent class with common functionality
+│   ├── agent.ts              # Campaign agent implementation
+│   └── data.ts               # Campaign data (events, policies, etc.)
+├── server.ts                 # Main Express server
+├── router.ts                 # Express router for webhook handling
+├── package.json              # Project dependencies
+├── tsconfig.json             # TypeScript configuration
+├── .env.example              # Environment variables template
+└── .gitignore                # Git ignore rules
 ```
 
 ## Setup
@@ -102,14 +90,16 @@ Political-Campaign/
 
 4. Configure your environment variables in `.env`:
 
-   - `PINNACLE_API_KEY`: Your Pinnacle API key
-   - `PINNACLE_AGENT_ID`: Your RCS agent ID
-   - `PINNACLE_SIGNING_SECRET`: Your webhook signing secret (found in the [Pinnacle Webhooks Dashboard](https://app.pinnacle.sh/dashboard/development/webhooks))
-   - `TEST_MODE`: Set to `true` for sending with a test agent
-   - `DONATION_SUPPORTER_IMAGE`: Image URL for $25 donation tier
-   - `DONATION_ADVOCATE_IMAGE`: Image URL for $50 donation tier
-   - `DONATION_CHAMPION_IMAGE`: Image URL for $100 donation tier
-   - `PORT`: Server port (default: 3000)
+```env
+PINNACLE_API_KEY=your_api_key_here
+PINNACLE_AGENT_ID=your_agent_id_here
+PINNACLE_SIGNING_SECRET=your_signing_secret_here
+TEST_MODE=false
+PORT=3000
+DONATION_SUPPORTER_IMAGE=your_supporter_image_url
+DONATION_ADVOCATE_IMAGE=your_advocate_image_url
+DONATION_CHAMPION_IMAGE=your_champion_image_url
+```
 
 5. Set up a public HTTPS URL for your webhook. For local development, you can use a tunneling service like [ngrok](https://ngrok.com):
 
@@ -124,76 +114,55 @@ Political-Campaign/
    - Go to the [Pinnacle Webhooks Dashboard](https://app.pinnacle.sh/dashboard/development/webhooks)
    - Add your public URL with the `/webhook` path (e.g., `https://your-domain.com/webhook`)
    - Select your RCS agent to receive messages at this endpoint
-   - Copy the signing secret and add it to your `.env` file as `PINNACLE_SIGNING_SECRET`. The `process()` method automatically uses this environment variable to verify the request signature.
+   - Copy the signing secret and add it to your `.env` file as `PINNACLE_SIGNING_SECRET`. The `process()` method uses this environment variable to verify the request signature.
 
 7. Text "MENU" to the bot to see the main menu.
 
-## Usage
+### Running the Application
 
-### Development
+Development mode with auto-reload:
 
 ```bash
 npm run dev
 ```
 
-### Production
+Production mode:
 
 ```bash
 npm start
 ```
 
-### Supported Message Types
+## Configuration
 
-**Button Actions**: Users interact primarily through rich buttons with predefined actions
+### Environment Variables
 
-- Main menu navigation
-- Event RSVPs
-- Donation processing
-- Volunteer signups
+| Variable                   | Description                                                            | Required            |
+| -------------------------- | ---------------------------------------------------------------------- | ------------------- |
+| `PINNACLE_API_KEY`         | Your Pinnacle API key                                                  | Yes                 |
+| `PINNACLE_AGENT_ID`        | Your RCS agent ID from Pinnacle Dashboard                              | Yes                 |
+| `PINNACLE_SIGNING_SECRET`  | Webhook signing secret for verification                                | Yes                 |
+| `TEST_MODE`                | Set to `true` for sending with a test RCS agent to whitelisted numbers | No (default: false) |
+| `PORT`                     | Server port                                                            | No (default: 3000)  |
+| `DONATION_SUPPORTER_IMAGE` | Image URL for $25 donation tier                                        | Yes                 |
+| `DONATION_ADVOCATE_IMAGE`  | Image URL for $50 donation tier                                        | Yes                 |
+| `DONATION_CHAMPION_IMAGE`  | Image URL for $100 donation tier                                       | Yes                 |
 
-**Text Messages**: Limited to specific contexts
+## Supported Actions
 
-- Custom donation amounts (numeric input only)
-- Keyword triggers: `MENU`, `START`, `SUBSCRIBE`
-
-**Location Sharing**: Used for polling location finder
-
-### Button Payload Structure
-
-All button actions use a standardized payload format:
-
-```typescript
-{
-  action: string,
-  params?: {
-    [key: string]: string | number
-  }
-}
-```
-
-Example:
-
-```json
-{
-  "action": "processDonation",
-  "params": {
-    "amount": 50,
-    "tierId": "advocate"
-  }
-}
-```
-
-## Environment Variables
-
-| Variable                   | Description                      | Required            |
-| -------------------------- | -------------------------------- | ------------------- |
-| `PINNACLE_API_KEY`         | Your Pinnacle API key            | Yes                 |
-| `PINNACLE_AGENT_ID`        | Your RCS agent ID                | Yes                 |
-| `PINNACLE_SIGNING_SECRET`  | Webhook signing secret           | Yes                 |
-| `TEST_MODE`                | Enable test mode (true/false)    | No (default: false) |
-| `DONATION_SUPPORTER_IMAGE` | Image URL for $25 donation tier  | Yes                 |
-| `DONATION_ADVOCATE_IMAGE`  | Image URL for $50 donation tier  | Yes                 |
-| `DONATION_CHAMPION_IMAGE`  | Image URL for $100 donation tier | Yes                 |
+| Action             | Description                  |
+| ------------------ | ---------------------------- |
+| `showMainMenu`     | Display main menu            |
+| `showEvents`       | View upcoming events         |
+| `rsvpEvent`        | RSVP for an event            |
+| `getDirections`    | Get directions to event      |
+| `showPolicies`     | View policy positions        |
+| `viewPolicy`       | View detailed policy info    |
+| `showDonations`    | View donation options        |
+| `processDonation`  | Process a donation           |
+| `showVolunteer`    | View volunteer opportunities |
+| `signUpVolunteer`  | Sign up to volunteer         |
+| `showVotingInfo`   | View voting information      |
+| `findPollingPlace` | Find polling location        |
 
 ## Customization
 
@@ -225,6 +194,21 @@ Edit `lib/data.ts` and add to the `policyPositions` array with title, quote, des
 ### Modifying Donation Tiers
 
 Update the `donationTiers` array in `lib/data.ts` with custom amounts, titles, descriptions, and perks.
+
+## Technologies
+
+- **TypeScript**: Type-safe development
+- **Express**: Web framework for webhook handling
+- **rcs-js**: Pinnacle RCS SDK v2.0.6+
+- **tsx**: TypeScript execution and hot-reload
+
+## Support
+
+For issues related to:
+
+- RCS functionality: Contact Pinnacle support
+- Chatbot implementation: Refer to the code documentation
+- Configuration: Check the `.env.example` file
 
 ## Resources
 
