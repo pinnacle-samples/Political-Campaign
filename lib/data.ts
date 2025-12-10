@@ -22,7 +22,7 @@ export const upcomingEvents = [
     lng: -122.4193,
     capacity: 500,
     registered: 342,
-    media: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800',
+    media: 'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/town-hall-sf.jpg',
   },
   {
     id: 'rally-berkeley',
@@ -36,7 +36,7 @@ export const upcomingEvents = [
     lng: -122.2595,
     capacity: 1000,
     registered: 756,
-    media: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800',
+    media: 'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/rally-berkeley.jpg',
   },
   {
     id: 'fundraiser-dinner',
@@ -50,7 +50,7 @@ export const upcomingEvents = [
     lng: -122.4104,
     capacity: 150,
     registered: 148,
-    media: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800',
+    media: 'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/fundraiser-dinner.jpg',
   },
   {
     id: 'youth-forum',
@@ -64,7 +64,7 @@ export const upcomingEvents = [
     lng: -122.1697,
     capacity: 300,
     registered: 287,
-    media: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800',
+    media: 'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/youth-forum.jpg',
   },
 ];
 
@@ -77,7 +77,7 @@ export const policyPositions = [
     description:
       "I believe in a nation where every citizen, regardless of race, religion, or background, has equal rights and opportunities. We must enforce desegregation, protect voting rights, and ensure justice for all. The struggle for civil rights is the struggle for America's soul. We cannot be satisfied until justice rolls down like waters and righteousness like a mighty stream. Our Constitution promises equality, but we must make that promise a reality through action. Federal intervention is necessary to protect those whose rights are denied. We will work with Congress to pass comprehensive civil rights legislation that ensures equal access to education, employment, housing, and public facilities. No American should face discrimination because of the color of their skin, their faith, or where they come from. This is not just a legal issue—it is a moral imperative. America was founded on the principle that all men are created equal, and we must live up to that founding promise. The world is watching to see if we practice what we preach about democracy and freedom.",
     icon: '⚖️',
-    media: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800',
+    media: 'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/civil-rights.jpg',
     keyPoints: [
       'Federal enforcement of school desegregation',
       'Voting rights protection',
@@ -92,7 +92,7 @@ export const policyPositions = [
     description:
       'America must lead in space exploration to secure our future and inspire generations. This decade will see us land on the moon and establish our nation as the leader in science and technology. The exploration of space will go ahead whether we join in it or not, and it is one of the great adventures of all time. No nation which expects to be the leader of other nations can expect to stay behind in this race for space. We choose to go to the moon in this decade and do the other things, not because they are easy, but because they are hard, because that goal will serve to organize and measure the best of our energies and skills. This challenge is one we are willing to accept, one we are unwilling to postpone, and one we intend to win. Space science and technology will drive innovation across every industry, create millions of jobs, and inspire our young people to pursue careers in science and engineering. The rockets and satellites we build today will secure our national defense tomorrow.',
     icon: '🚀',
-    media: 'https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=800',
+    media: 'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/space-exploration.jpg',
     keyPoints: [
       "Land a man on the moon by decade's end",
       'Invest in NASA and aerospace research',
@@ -107,7 +107,7 @@ export const policyPositions = [
     description:
       "Healthcare is a right, not a privilege. We must establish Medicare to ensure our seniors receive the medical care they deserve after a lifetime of contribution. Too many of our elderly citizens face the choice between buying food and buying medicine, between paying rent and paying hospital bills. This is unacceptable in the wealthiest nation on earth. Medicare will provide hospital insurance for Americans over 65, ensuring that illness in old age does not mean financial ruin. Our senior citizens built this country—they fought our wars, raised our families, and worked in our factories and farms. They deserve dignity and security in their retirement years. We will also expand access to preventive care, prescription drug coverage, and long-term care facilities. A healthy population is a productive population, and investing in healthcare is investing in America's future. This program will be funded through payroll contributions, ensuring its sustainability for generations to come.",
     icon: '🏥',
-    media: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800',
+    media: 'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/healthcare.jpg',
     keyPoints: [
       'Create Medicare for seniors',
       'Hospital insurance coverage',
@@ -122,7 +122,7 @@ export const policyPositions = [
     description:
       "Education is the foundation of our democracy. We must invest in schools, support teachers, and ensure every American child has access to quality education. The pursuit of knowledge is the key to unlocking human potential and building a prosperous nation. We need more classrooms, better-equipped laboratories, and higher salaries to attract and retain the best teachers. Federal aid to education is not federal control—it is a partnership to ensure that every child, regardless of where they live or their family's income, has the opportunity to develop their talents. We will establish scholarship programs to help qualified students attend college, because economic barriers should never prevent capable minds from reaching their full potential. Adult education and literacy programs will help those who missed educational opportunities in their youth. An educated citizenry is essential for self-government and economic competitiveness. The nation that out-educates us today will out-compete us tomorrow.",
     icon: '📚',
-    media: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800',
+    media: 'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/education.jpg',
     keyPoints: [
       'Federal aid for public schools',
       'Higher teacher salaries',
@@ -137,7 +137,7 @@ export const policyPositions = [
     description:
       "The Peace Corps will send Americans abroad to help developing nations, promote peace, and show the world America's commitment to service and goodwill. In a world divided by ideology and threatened by conflict, we need a new approach to winning hearts and minds. The Peace Corps will mobilize the idealism and skills of young Americans to serve in developing countries, teaching in schools, improving agricultural techniques, building infrastructure, and providing healthcare. This is not charity—it is partnership. It is person-to-person diplomacy that shows the world the true face of America: generous, capable, and dedicated to human dignity. Volunteers will live and work alongside the people they serve, learning as much as they teach, building bridges of understanding that no amount of military might can construct. The Peace Corps will be a tool of peace in the Cold War, demonstrating that freedom and democracy can address poverty and injustice. It will give our young people a chance to serve their country and humanity in the most meaningful way possible.",
     icon: '🕊️',
-    media: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800',
+    media: 'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/peace-corps.jpg',
     keyPoints: [
       'Establish the Peace Corps',
       'Deploy volunteers to developing nations',
@@ -152,7 +152,7 @@ export const policyPositions = [
     description:
       "We must stimulate economic growth through investment in infrastructure, education, and innovation. Tax cuts will put money back in workers' pockets. Our economy has tremendous potential, but we need policies that unlock growth and create opportunity for all Americans. Strategic tax cuts will provide incentives for business investment and increase consumer purchasing power, driving demand and job creation. We will invest in highways, bridges, airports, and telecommunications infrastructure—the arteries of commerce that connect our nation. Small businesses are the backbone of our economy, and we will ensure they have access to capital and support to grow. We must also invest in research and development, particularly in emerging technologies that will define the industries of tomorrow. Economic growth is not just about statistics—it's about families being able to afford a home, send their kids to college, and retire with dignity. A rising tide lifts all boats, and our policies will ensure that prosperity is widely shared across all regions and communities.",
     icon: '💼',
-    media: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800',
+    media: 'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/economy.jpg',
     keyPoints: [
       'Tax cuts for working families',
       'Infrastructure investment',
@@ -172,7 +172,7 @@ export const volunteerOpportunities = [
     location: 'Your neighborhood',
     description: "Talk to voters in your community about JFK's vision for America",
     icon: '🚪',
-    media: 'https://www.ngpvan.com/wp-content/uploads/2023/12/iStock-1162410512-min.jpg',
+    media: 'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/volunteer-community.jpg',
   },
   {
     id: 'phone-banking',
@@ -182,7 +182,7 @@ export const volunteerOpportunities = [
     location: 'From home',
     description: 'Call voters to discuss key issues and encourage turnout',
     icon: '📞',
-    media: 'https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=800',
+    media: 'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/phone-banking.jpg',
   },
   {
     id: 'event-staff',
@@ -192,7 +192,7 @@ export const volunteerOpportunities = [
     location: 'Campaign events',
     description: 'Help organize and run campaign rallies and town halls',
     icon: '🎪',
-    media: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800',
+    media: 'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/event-volunteer.jpg',
   },
   {
     id: 'voter-registration',
@@ -203,7 +203,7 @@ export const volunteerOpportunities = [
     description: 'Help register new voters and ensure everyone can participate',
     icon: '📝',
     media:
-      'https://www.democracydocket.com/wp-content/uploads/2024/10/Vote-Here-sign-with-long-line-outside-a-busy-polling-station-AdobeStock_741117117-1-1024x574.jpeg',
+      'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/voting-line.jpeg',
   },
 ];
 
@@ -259,7 +259,7 @@ export const pollingLocations = [
     lng: -122.4193,
     hours: '7:00 AM - 8:00 PM',
     accessibility: 'Wheelchair accessible, parking available',
-    media: 'https://mediaim.expedia.com/destination/1/92e21ddd18bf766a65fca9d8437ba090.jpg',
+    media: 'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/san-francisco-skyline.jpg',
   },
   {
     id: 'sf-main-library',
@@ -270,7 +270,7 @@ export const pollingLocations = [
     hours: '7:00 AM - 8:00 PM',
     accessibility: 'Wheelchair accessible, public transit nearby',
     media:
-      'https://img.hoodline.com/uploads/story/image/204179/SFPL_flickr_jan_2019.jpg?max-h=442&w=760&fit=crop&crop=faces,center',
+      'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/sf-library.jpg',
   },
   {
     id: 'ferry-building',
@@ -280,7 +280,7 @@ export const pollingLocations = [
     lng: -122.3935,
     hours: '7:00 AM - 8:00 PM',
     accessibility: 'Wheelchair accessible, waterfront location',
-    media: 'https://familyhotelfinder.com/wp-content/uploads/San-Francisco-Ferry-Building6-SH.jpg',
+    media: 'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/sf-ferry-building.jpg',
   },
   {
     id: 'civic-center',
@@ -290,6 +290,6 @@ export const pollingLocations = [
     lng: -122.4186,
     hours: '7:00 AM - 8:00 PM',
     accessibility: 'Wheelchair accessible, multilingual staff',
-    media: 'https://www.newportbeachca.gov/home/showpublishedimage/68932/638935441738770000',
+    media: 'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/civic-center.jpg',
   },
 ];

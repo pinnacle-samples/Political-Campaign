@@ -445,7 +445,7 @@ export class JFKAgent extends BaseAgent {
             .map((item) => `• ${item}`)
             .join('\n')}`,
           media:
-            'https://mediarelations.gwu.edu/sites/g/files/zaxdzs5306/files/2024-09/adobestock_789130977.jpeg',
+            'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/campaign-rally.jpeg',
           buttons: [
             {
               type: 'trigger',
@@ -458,7 +458,7 @@ export class JFKAgent extends BaseAgent {
           title: '🗓️ Important Dates',
           subtitle: `Mark your calendar\n\nRegistration Deadline:\n${votingInfo.registrationDeadline}\n\nEarly Voting Starts:\n${votingInfo.earlyVotingStarts}\n\nElection Day:\n${votingInfo.electionDay}`,
           media:
-            'https://fieldnotesbrand.imgix.net/images/FN-18-Calendar-2026-Pages.jpg?ixlib=php-4.1.0&s=37f07777f7f3f0b07cc3f960b62df9d3',
+            'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/calendar-2026.jpg',
           buttons: [
             {
               type: 'requestUserLocation',
