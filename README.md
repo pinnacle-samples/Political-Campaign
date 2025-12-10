@@ -1,6 +1,7 @@
 # JFK for President - Political Campaign Chatbot
 
 An interactive political campaign RCS chatbot that demonstrates how campaigns can engage voters through Rich Communication Services (RCS) messaging, featuring event management, policy information, donations, and volunteer coordination.
+
 https://github.com/user-attachments/assets/39050218-d3bb-409c-bdcb-8a6b78f1efc8
 
 ## Features
