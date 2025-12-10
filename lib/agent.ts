@@ -13,7 +13,11 @@ export class JFKAgent extends BaseAgent {
   private pendingCustomDonations: Set<string> = new Set();
 
   // Override sendStrictFormatMessage to include Donate button
-  async sendStrictFormatMessage(to: string, formatInstructions: string, includeDonationButtons = false) {
+  async sendStrictFormatMessage(
+    to: string,
+    formatInstructions: string,
+    includeDonationButtons = false
+  ) {
     const quickReplies: Pinnacle.RichButton[] = [
       {
         type: 'trigger',
@@ -75,7 +79,8 @@ export class JFKAgent extends BaseAgent {
         {
           title: 'JFK for President!',
           subtitle: '"A Time for Greatness" 🇺🇸',
-          media: 'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/jfk-banner.png',
+          media:
+            'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/jfk.jpg',
           buttons: [],
         },
       ],
@@ -293,12 +298,12 @@ export class JFKAgent extends BaseAgent {
       } benefit items will be shipped to your billing address after the donation is processed.\n\nYour ${
         tier.title
       } Benefits:\n${perksText}\n\nConfirmation #: JFK${Math.floor(
-        Math.random() * 100000,
+        Math.random() * 100000
       )}\n\n"The torch has been passed to a new generation of Americans."`;
     } else {
       // Fallback if tier still not found
       message = `🎉 Thank You for Your Support!\n\nYour $${amount} donation makes a real difference in this campaign. Together, we're building a better America.\n\nYour phone number has been registered as a campaign supporter.\n\nConfirmation #: JFK${Math.floor(
-        Math.random() * 100000,
+        Math.random() * 100000
       )}\n\n"The torch has been passed to a new generation of Americans."`;
     }
 

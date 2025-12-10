@@ -1,14 +1,23 @@
 import { Router, Request, Response } from 'express';
-import { RequestWithMessageEvent, TriggerPayload } from './lib/types';
 import { agent } from './lib/agent';
+import { rcsClient } from './lib/rcsClient';
+
+interface TriggerPayload {
+  action: string;
+  params?: Record<string, string | number>;
+}
 
 const jfkRouter = Router();
 
 jfkRouter.post('/', async (req: Request, res: Response) => {
   try {
-    const messageEvent = (req as RequestWithMessageEvent).messageEvent;
+    const messageEvent = await rcsClient.messages.process(req);
+    if (!('message' in messageEvent)) {
+      return res.status(200).json({ message: 'No message found' });
+    }
     const message = messageEvent.message;
     const from = messageEvent.conversation.from;
+
     // Handle button actions
     if (
       message.type === 'RCS_BUTTON_DATA' &&
@@ -55,7 +64,7 @@ jfkRouter.post('/', async (req: Request, res: Response) => {
             await agent.processDonation(
               from,
               payload.params.amount as number,
-              payload.params.tierId as string,
+              payload.params.tierId as string
             );
             return res.status(200).json({ message: 'Donation processed' });
           }
@@ -122,7 +131,7 @@ jfkRouter.post('/', async (req: Request, res: Response) => {
         // User sent text but isn't in custom donation mode - notify them
         await agent.sendStrictFormatMessage(
           from,
-          'Text input is only accepted when making a custom donation.\n\nPlease use the buttons to interact with JFK for President.',
+          'Text input is only accepted when making a custom donation.\n\nPlease use the buttons to interact with JFK for President.'
         );
         return res.status(200).json({
           message: 'Text message outside donation context, sent notice to user.',
@@ -141,16 +150,12 @@ jfkRouter.post('/', async (req: Request, res: Response) => {
       await agent.sendStrictFormatMessage(
         from,
         'To make a custom donation, please enter a numeric amount (e.g., "50" for $50).\n\nOr use the buttons to select from preset donation amounts.',
-        true, // Include donation amount buttons
+        true // Include donation amount buttons
       );
       return res.status(200).json({ message: 'Invalid donation format, sent notice to user.' });
     }
 
-    // Unknown message type
-    console.error('[JFK]: Unhandled message type');
-    return res.status(400).json({
-      error: 'Unhandled message type',
-    });
+    return res.status(200).json({ message: 'No message found' });
   } catch (error) {
     console.error('[JFK]: Internal server error', error);
     return res.status(500).json({
