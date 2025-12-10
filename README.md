@@ -105,10 +105,11 @@ Political-Campaign/
    - `PINNACLE_API_KEY`: Your Pinnacle API key
    - `PINNACLE_AGENT_ID`: Your RCS agent ID
    - `PINNACLE_SIGNING_SECRET`: Your webhook signing secret (found in the [Pinnacle Webhooks Dashboard](https://app.pinnacle.sh/dashboard/development/webhooks))
-   - `TEST_MODE`: Set to `true` for testing
+   - `TEST_MODE`: Set to `true` for sending with a test agent
    - `DONATION_SUPPORTER_IMAGE`: Image URL for $25 donation tier
    - `DONATION_ADVOCATE_IMAGE`: Image URL for $50 donation tier
    - `DONATION_CHAMPION_IMAGE`: Image URL for $100 donation tier
+   - `PORT`: Server port (default: 3000)
 
 5. Set up a public HTTPS URL for your webhook. For local development, you can use a tunneling service like [ngrok](https://ngrok.com):
 
