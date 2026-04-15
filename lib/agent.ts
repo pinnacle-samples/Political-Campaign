@@ -9,15 +9,11 @@ import {
   pollingLocations,
 } from './data';
 
-export class JFKAgent extends BaseAgent {
+export class AscendAgent extends BaseAgent {
   private pendingCustomDonations: Set<string> = new Set();
 
   // Override sendStrictFormatMessage to include Donate button
-  async sendStrictFormatMessage(
-    to: string,
-    formatInstructions: string,
-    includeDonationButtons = false
-  ) {
+  async sendStrictFormatMessage(to: string, formatInstructions: string, includeDonationButtons = false) {
     const quickReplies: Pinnacle.RichButton[] = [
       {
         type: 'trigger',
@@ -66,7 +62,6 @@ export class JFKAgent extends BaseAgent {
       to,
       text: formatInstructions,
       quickReplies,
-      options: { test_mode: this.TEST_MODE },
     });
   }
 
@@ -77,19 +72,13 @@ export class JFKAgent extends BaseAgent {
       to: to,
       cards: [
         {
-          title: 'JFK for President!',
-          subtitle: '"A Time for Greatness" 🇺🇸',
-          media:
-            'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/jfk.jpg',
+          title: 'Ascend 2028',
+          subtitle: '"A movement upward." 🇺🇸',
+          media: 'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/ARC/ascend/logo.png',
           buttons: [],
         },
       ],
       quickReplies: [
-        {
-          type: 'trigger',
-          title: '🔚 End Demo',
-          payload: 'END_DEMO',
-        },
         {
           type: 'trigger',
           title: '🗓️ Upcoming Events',
@@ -115,14 +104,18 @@ export class JFKAgent extends BaseAgent {
           title: '🗳️ Voting Info',
           payload: JSON.stringify({ action: 'votingInfo' }),
         },
+        {
+          type: 'trigger',
+          title: '🔚 End Demo',
+          payload: 'END_DEMO',
+        },
       ],
-      options: { test_mode: this.TEST_MODE },
     });
   }
 
   // View Upcoming Events
   async viewEvents(to: string) {
-    const eventCards: Pinnacle.RcsCards.Cards.Item[] = upcomingEvents.map((event) => ({
+    const eventCards: Pinnacle.RichCards.Cards.Item[] = upcomingEvents.map((event) => ({
       title: `${event.location}\n${event.date} • ${event.time}`,
       subtitle: event.description,
       media: event.media,
@@ -137,7 +130,7 @@ export class JFKAgent extends BaseAgent {
         },
         {
           type: 'sendLocation',
-          title: '📍 Get Directions',
+          title: 'Get Directions',
           latLong: {
             lat: event.lat,
             lng: event.lng,
@@ -162,7 +155,6 @@ export class JFKAgent extends BaseAgent {
           payload: JSON.stringify({ action: 'mainMenu' }),
         },
       ],
-      options: { test_mode: this.TEST_MODE },
     });
   }
 
@@ -181,7 +173,7 @@ export class JFKAgent extends BaseAgent {
       quickReplies: [
         {
           type: 'sendLocation',
-          title: '🗺️ Get Directions',
+          title: 'Get Directions',
           latLong: {
             lat: event.lat,
             lng: event.lng,
@@ -198,13 +190,12 @@ export class JFKAgent extends BaseAgent {
           payload: JSON.stringify({ action: 'mainMenu' }),
         },
       ],
-      options: { test_mode: this.TEST_MODE },
     });
   }
 
   // View Policy Positions
   async viewPolicies(to: string) {
-    const policyCards: Pinnacle.RcsCards.Cards.Item[] = policyPositions.map((policy) => {
+    const policyCards: Pinnacle.RichCards.Cards.Item[] = policyPositions.map((policy) => {
       const keyPointsText = policy.keyPoints.map((point) => `• ${point}`).join('\n');
       return {
         title: `${policy.icon} ${policy.title}`,
@@ -230,13 +221,12 @@ export class JFKAgent extends BaseAgent {
           payload: JSON.stringify({ action: 'mainMenu' }),
         },
       ],
-      options: { test_mode: this.TEST_MODE },
     });
   }
 
   // Donate
   async donate(to: string) {
-    const donationCards: Pinnacle.RcsCards.Cards.Item[] = donationTiers.map((tier) => {
+    const donationCards: Pinnacle.RichCards.Cards.Item[] = donationTiers.map((tier) => {
       return {
         title: `$${tier.amount} - ${tier.title}`,
         subtitle: tier.description,
@@ -270,7 +260,6 @@ export class JFKAgent extends BaseAgent {
           payload: JSON.stringify({ action: 'mainMenu' }),
         },
       ],
-      options: { test_mode: this.TEST_MODE },
     });
   }
 
@@ -297,14 +286,14 @@ export class JFKAgent extends BaseAgent {
         tier.title
       } benefit items will be shipped to your billing address after the donation is processed.\n\nYour ${
         tier.title
-      } Benefits:\n${perksText}\n\nConfirmation #: JFK${Math.floor(
-        Math.random() * 100000
-      )}\n\n"The torch has been passed to a new generation of Americans."`;
+      } Benefits:\n${perksText}\n\nConfirmation #: ASC${Math.floor(
+        Math.random() * 100000,
+      )}\n\n"Together, we rise."`;
     } else {
       // Fallback if tier still not found
-      message = `🎉 Thank You for Your Support!\n\nYour $${amount} donation makes a real difference in this campaign. Together, we're building a better America.\n\nYour phone number has been registered as a campaign supporter.\n\nConfirmation #: JFK${Math.floor(
-        Math.random() * 100000
-      )}\n\n"The torch has been passed to a new generation of Americans."`;
+      message = `🎉 Thank You for Your Support!\n\nYour $${amount} donation makes a real difference in this campaign. Together, we're building a better America.\n\nYour phone number has been registered as a campaign supporter.\n\nConfirmation #: ASC${Math.floor(
+        Math.random() * 100000,
+      )}\n\n"Together, we rise."`;
     }
 
     return await this.client.messages.rcs.send({
@@ -328,7 +317,6 @@ export class JFKAgent extends BaseAgent {
           payload: JSON.stringify({ action: 'mainMenu' }),
         },
       ],
-      options: { test_mode: this.TEST_MODE },
     });
   }
 
@@ -348,7 +336,6 @@ export class JFKAgent extends BaseAgent {
           payload: JSON.stringify({ action: 'donate' }),
         },
       ],
-      options: { test_mode: this.TEST_MODE },
     });
   }
 
@@ -364,7 +351,7 @@ export class JFKAgent extends BaseAgent {
 
   // Volunteer
   async volunteer(to: string) {
-    const volunteerCards: Pinnacle.RcsCards.Cards.Item[] = volunteerOpportunities.map((opp) => ({
+    const volunteerCards: Pinnacle.RichCards.Cards.Item[] = volunteerOpportunities.map((opp) => ({
       title: `${opp.icon} ${opp.title}`,
       subtitle: `${opp.category} • ${opp.timeCommitment}\n${opp.description}`,
       media: opp.media,
@@ -387,7 +374,7 @@ export class JFKAgent extends BaseAgent {
       quickReplies: [
         {
           type: 'call',
-          title: '📞 Talk to Coordinator',
+          title: 'Talk to Coordinator',
           payload: '+18005551234',
         },
         {
@@ -396,7 +383,6 @@ export class JFKAgent extends BaseAgent {
           payload: JSON.stringify({ action: 'mainMenu' }),
         },
       ],
-      options: { test_mode: this.TEST_MODE },
     });
   }
 
@@ -425,7 +411,6 @@ export class JFKAgent extends BaseAgent {
           payload: JSON.stringify({ action: 'mainMenu' }),
         },
       ],
-      options: { test_mode: this.TEST_MODE },
     });
   }
 
@@ -445,7 +430,7 @@ export class JFKAgent extends BaseAgent {
             .map((item) => `• ${item}`)
             .join('\n')}`,
           media:
-            'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/campaign-rally.jpeg',
+            'https://mediarelations.gwu.edu/sites/g/files/zaxdzs5306/files/2024-09/adobestock_789130977.jpeg',
           buttons: [
             {
               type: 'trigger',
@@ -458,11 +443,11 @@ export class JFKAgent extends BaseAgent {
           title: '🗓️ Important Dates',
           subtitle: `Mark your calendar\n\nRegistration Deadline:\n${votingInfo.registrationDeadline}\n\nEarly Voting Starts:\n${votingInfo.earlyVotingStarts}\n\nElection Day:\n${votingInfo.electionDay}`,
           media:
-            'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/demos/political-campaign/calendar-2026.jpg',
+            'https://server.trypinnacle.app/storage/v1/object/public/pinnacle-public-assets/ARC/ascend/calendar-important-dates.png',
           buttons: [
             {
               type: 'requestUserLocation',
-              title: '📍 Find Polling Place',
+              title: 'Find Polling Place',
             },
           ],
         },
@@ -479,7 +464,6 @@ export class JFKAgent extends BaseAgent {
           payload: JSON.stringify({ action: 'mainMenu' }),
         },
       ],
-      options: { test_mode: this.TEST_MODE },
     });
   }
 
@@ -492,8 +476,9 @@ export class JFKAgent extends BaseAgent {
       quickReplies: [
         {
           type: 'openUrl',
-          title: '🌐 Visit Website',
+          title: 'Visit Website',
           payload: 'https://voterstatus.sos.ca.gov/',
+          webviewMode: 'FULL',
         },
         {
           type: 'trigger',
@@ -506,20 +491,19 @@ export class JFKAgent extends BaseAgent {
           payload: JSON.stringify({ action: 'mainMenu' }),
         },
       ],
-      options: { test_mode: this.TEST_MODE },
     });
   }
 
   // Send Polling Locations
   async sendPollingLocations(to: string) {
-    const pollingCards: Pinnacle.RcsCards.Cards.Item[] = pollingLocations.map((location) => ({
+    const pollingCards: Pinnacle.RichCards.Cards.Item[] = pollingLocations.map((location) => ({
       title: location.name,
       subtitle: `${location.address}\n\n${location.hours}\n\n${location.accessibility}`,
       media: location.media,
       buttons: [
         {
           type: 'sendLocation',
-          title: '🗺️ Get Directions',
+          title: 'Get Directions',
           latLong: {
             lat: location.lat,
             lng: location.lng,
@@ -549,9 +533,8 @@ export class JFKAgent extends BaseAgent {
           payload: JSON.stringify({ action: 'mainMenu' }),
         },
       ],
-      options: { test_mode: this.TEST_MODE },
     });
   }
 }
 
-export const agent = new JFKAgent();
+export const agent = new AscendAgent();

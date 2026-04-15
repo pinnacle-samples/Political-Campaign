@@ -1,218 +1,121 @@
-# JFK for President - Political Campaign Chatbot
+# Ascend 2028 — RCS Political Campaign Chatbot
 
-An interactive political campaign RCS chatbot that demonstrates how campaigns can engage voters through Rich Communication Services (RCS) messaging, featuring event management, policy information, donations, and volunteer coordination.
+A political campaign chatbot that runs entirely over RCS. Voters can RSVP to upcoming events, read policy positions, sign up to volunteer, donate at fixed or custom amounts, and check their voter registration — all from inside the messages app.
+
+> **Live guide:** https://pinnacle.sh/samples/ascend-2028
 
 https://github.com/user-attachments/assets/39050218-d3bb-409c-bdcb-8a6b78f1efc8
 
-## Features
+> Note: the visuals in this demo recording have since been refreshed with sharper brand assets. The conversation flow is identical to what you'll get from a fresh clone.
 
-### Campaign Events
+## What's inside
 
-- View upcoming campaign rallies, town halls, and fundraisers
-- RSVP for events directly through the chatbot
-- Get directions to event locations with interactive maps
-- Real-time event capacity tracking
+- Browse upcoming town halls and rallies with RSVP
+- Policy positions across major issues, served as rich cards
+- Volunteer signup with role selection
+- Tiered donation flow with custom amount support
+- Voter registration check inside the conversation
 
-### Policy Positions
-
-- Browse detailed policy positions on key issues:
-  - Civil Rights
-  - Space Exploration
-  - Healthcare for Seniors
-  - Education
-  - Peace Corps
-  - Economic Growth
-- Each policy includes quotes, key points, and comprehensive descriptions
-
-### Donations
-
-- Three donation tiers: Supporter ($25), Advocate ($50), Champion ($100)
-- Custom donation amounts with text input
-- Tier-based perks and benefits
-- Automated donation confirmation with unique tracking numbers
-
-### Volunteer Opportunities
-
-- Sign up for various volunteer roles:
-  - Door-to-door canvassing
-  - Phone banking
-  - Event staffing
-  - Voter registration drives
-- Time commitment and location details for each opportunity
-- Direct connection to volunteer coordinators
-
-### Voting Information
-
-- Voter registration deadlines and requirements
-- Early voting and election day information
-- Polling location finder with location sharing
-- Registration status checking
-
-## Project Structure
-
-```
-Political-Campaign/
-├── lib/
-│   ├── rcsClient.ts          # Pinnacle RCS client configuration
-│   ├── baseAgent.ts          # Base agent class with common functionality
-│   ├── agent.ts              # Campaign agent implementation
-│   └── data.ts               # Campaign data (events, policies, etc.)
-├── server.ts                 # Main Express server
-├── router.ts                 # Express router for webhook handling
-├── package.json              # Project dependencies
-├── tsconfig.json             # TypeScript configuration
-├── .env.example              # Environment variables template
-└── .gitignore                # Git ignore rules
-```
-
-## Setup
-
-### Prerequisites
+## Prerequisites
 
 - Node.js 18+
-- A Pinnacle API account
-- RCS agent configured in Pinnacle
+- A Pinnacle account — [sign up](https://app.pinnacle.sh/auth/sign-up)
+- An RCS [test agent](https://docs.pinnacle.sh/guides/branded-test-agents) for development
+- A Pinnacle [API key](https://app.pinnacle.sh/dashboard/development/api-keys) and [webhook signing secret](https://app.pinnacle.sh/dashboard/development/webhooks)
 
-### Installation
-
-1. Clone the repository
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. Create a `.env` file based on `.env.example`:
-
-   ```bash
-   cp .env.example .env
-   ```
-
-4. Configure your environment variables in `.env`:
-
-```env
-PINNACLE_API_KEY=your_api_key_here
-PINNACLE_AGENT_ID=your_agent_id_here
-PINNACLE_SIGNING_SECRET=your_signing_secret_here
-TEST_MODE=false
-PORT=3000
-DONATION_SUPPORTER_IMAGE=your_supporter_image_url
-DONATION_ADVOCATE_IMAGE=your_advocate_image_url
-DONATION_CHAMPION_IMAGE=your_champion_image_url
-```
-
-5. Set up a public HTTPS URL for your webhook. For local development, you can use a tunneling service like [ngrok](https://ngrok.com):
-
-   ```bash
-   ngrok http 3000
-   ```
-
-   For production, deploy to your preferred hosting provider.
-
-6. Connect your webhook to your RCS agent:
-
-   - Go to the [Pinnacle Webhooks Dashboard](https://app.pinnacle.sh/dashboard/development/webhooks)
-   - Add your public URL with the `/webhook` path (e.g., `https://your-domain.com/webhook`)
-   - Select your RCS agent to receive messages at this endpoint
-   - Copy the signing secret and add it to your `.env` file as `PINNACLE_SIGNING_SECRET`. The `process()` method uses this environment variable to verify the request signature.
-
-7. Text "MENU" to the bot to see the main menu.
-
-### Running the Application
-
-Development mode with auto-reload:
+## Quick start
 
 ```bash
+git clone https://github.com/pinnacle-samples/Ascend-2028
+cd Ascend-2028
+npm install
+cp .env.example .env
+# fill in PINNACLE_API_KEY, PINNACLE_AGENT_ID, PINNACLE_SIGNING_SECRET
 npm run dev
 ```
 
-Production mode:
+Expose your webhook with [ngrok](https://ngrok.com):
 
 ```bash
-npm start
+ngrok http 3000
 ```
 
-## Configuration
+Then in the [Pinnacle Webhooks dashboard](https://app.pinnacle.sh/dashboard/development/webhooks):
 
-### Environment Variables
+1. Add `https://<your-tunnel-domain>/webhook`
+2. Attach it to your RCS agent
+3. Copy the signing secret into `PINNACLE_SIGNING_SECRET`
 
-| Variable                   | Description                                                            | Required            |
-| -------------------------- | ---------------------------------------------------------------------- | ------------------- |
-| `PINNACLE_API_KEY`         | Your Pinnacle API key                                                  | Yes                 |
-| `PINNACLE_AGENT_ID`        | Your RCS agent ID from Pinnacle Dashboard                              | Yes                 |
-| `PINNACLE_SIGNING_SECRET`  | Webhook signing secret for verification                                | Yes                 |
-| `TEST_MODE`                | Set to `true` for sending with a test RCS agent to whitelisted numbers | No (default: false) |
-| `PORT`                     | Server port                                                            | No (default: 3000)  |
-| `DONATION_SUPPORTER_IMAGE` | Image URL for $25 donation tier                                        | Yes                 |
-| `DONATION_ADVOCATE_IMAGE`  | Image URL for $50 donation tier                                        | Yes                 |
-| `DONATION_CHAMPION_IMAGE`  | Image URL for $100 donation tier                                       | Yes                 |
+Send `MENU` or `START` to your agent — you'll see the Ascend 2028 landing card with **Events**, **Policies**, **Donate**, **Volunteer**, and **Voting Info**.
 
-## Supported Actions
+## Environment variables
 
-| Action             | Description                  |
-| ------------------ | ---------------------------- |
-| `showMainMenu`     | Display main menu            |
-| `showEvents`       | View upcoming events         |
-| `rsvpEvent`        | RSVP for an event            |
-| `getDirections`    | Get directions to event      |
-| `showPolicies`     | View policy positions        |
-| `viewPolicy`       | View detailed policy info    |
-| `showDonations`    | View donation options        |
-| `processDonation`  | Process a donation           |
-| `showVolunteer`    | View volunteer opportunities |
-| `signUpVolunteer`  | Sign up to volunteer         |
-| `showVotingInfo`   | View voting information      |
-| `findPollingPlace` | Find polling location        |
-
-## Customization
-
-### Adding New Events
-
-Edit `lib/data.ts` and add to the `upcomingEvents` array:
-
-```typescript
-{
-  id: 'unique-event-id',
-  name: 'Event Name',
-  date: 'Date',
-  time: 'Time',
-  location: 'Venue Name',
-  description: 'Event description',
-  address: 'Full address',
-  lat: 37.7749,
-  lng: -122.4194,
-  capacity: 500,
-  registered: 0,
-  media: 'image_url'
-}
+```env
+PINNACLE_API_KEY=your_pinnacle_api_key_here
+PINNACLE_AGENT_ID=your_agent_id_here
+PINNACLE_SIGNING_SECRET=your_pinnacle_signing_secret_here
+TEST_MODE=false
+PORT=3000
 ```
 
-### Adding New Policy Positions
+## Project structure
 
-Edit `lib/data.ts` and add to the `policyPositions` array with title, quote, description, key points, and media.
+```
+Ascend-2028/
+├── server.ts              # Express bootstrap
+├── router.ts              # /webhook POST — verifies + dispatches
+└── lib/
+    ├── rcsClient.ts       # PinnacleClient instance
+    ├── baseAgent.ts       # Shared send + typing helpers
+    ├── typing.ts          # Fire-and-forget typing indicator
+    ├── agent.ts           # AscendAgent — every action handler
+    └── data.ts            # Events, policies, donation tiers, volunteer roles
+```
 
-### Modifying Donation Tiers
+## Action handlers
 
-Update the `donationTiers` array in `lib/data.ts` with custom amounts, titles, descriptions, and perks.
+| Action | What it does |
+| --- | --- |
+| `mainMenu` / `showMainMenu` | Landing card with all entry points |
+| `viewEvents` / `rsvpEvent` | Browse and RSVP to town halls and rallies |
+| `viewPolicies` | Policy positions as a card carousel |
+| `donate` / `processDonation` | Tiered donation flow with confirmation |
+| `customDonation` | Free-form custom amount input |
+| `volunteer` / `signUpVolunteer` | Volunteer role picker and signup |
+| `votingInfo` / `checkRegistration` | Voter info + registration check |
 
-## Technologies
+## Customize the campaign
 
-- **TypeScript**: Type-safe development
-- **Express**: Web framework for webhook handling
-- **rcs-js**: Pinnacle RCS SDK v2.0.6+
-- **tsx**: TypeScript execution and hot-reload
+`lib/data.ts` is where everything lives. Drop in your own:
 
-## Support
+- `upcomingEvents` — town halls and rallies, with name, date, time, address, and capacity
+- `policyPositions` — issues and stances, served as rich card carousels
+- `volunteerOpportunities` — roles voters can sign up for
+- `donationTiers` — preset amounts and tier names
+- `votingInfo` — registration and voting deadlines for your district
 
-For issues related to:
+## Custom donations
 
-- RCS functionality: Contact Pinnacle support
-- Chatbot implementation: Refer to the code documentation
-- Configuration: Check the `.env.example` file
+The agent has a `pendingCustomDonations` set for users in the middle of a custom donation flow — they tap "Other amount", the agent waits for a number, and then `processDonation` confirms. The `sendStrictFormatMessage` helper repeats donation buttons whenever a user sends free-form text outside of that flow, keeping the conversation on rails.
+
+## Compliance note
+
+Political messaging is heavily regulated. Make sure to:
+
+- Honor STOP and HELP keywords (the SDK does this for you)
+- Comply with TCPA opt-in/opt-out rules
+- Add required disclosures to fundraising messages — your campaign's compliance lead will know what's required in your jurisdiction
+
+## Going to production
+
+- Set `TEST_MODE=false` and submit your agent for [carrier approval](https://docs.pinnacle.sh/guides/campaigns/rcs)
+- Wire donations to your real payment processor (Stripe, ActBlue, WinRed)
+- Replace the in-memory state with Postgres
+- Use proactive RCS messages for GOTV reminders, debate alerts, and event RSVPs
 
 ## Resources
 
-- **Dashboard**: Visit [Pinnacle Dashboard](https://app.pinnacle.sh)
-- **Documentation**: Visit [Pinnacle Documentation](https://docs.pinnacle.sh)
-- **Support**: Email [founders@trypinnacle.app](mailto:founders@trypinnacle.app)
+- **Live guide:** https://pinnacle.sh/samples/ascend-2028
+- **Pinnacle docs:** https://docs.pinnacle.sh/documentation/introduction
+- **Pinnacle dashboard:** https://app.pinnacle.sh
+- **Support:** founders@trypinnacle.app
